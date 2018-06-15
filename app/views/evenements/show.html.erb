@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titre:</strong>
+  <%= @evenement.titre %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @evenement.description %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @evenement.date %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @evenement.price %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @evenement.category.name %>
+</p>
+
+<p>
+  <strong>organisateur:</strong>
+  <%= @evenement.organisateur.title %>
+</p>
+
+<% @comments.each do |f| %>
+  <ul>
+    <form action="del" method="delete" >
+      <input type="hidden" name="id_comment" value="<%= f.id %>"  >
+      <li> <%= f.comment %> </li>
+      <input  type="submit" name="Envoyer">
+    </form>
+  </ul>
+<%end%>
+
+<form action="/" method="post" >
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" >
+    <input type="hidden" name="id_en_cours" value="<%= @evenement.id %>"  >
+    Votre commentaire: <br>
+    <textarea name="comment"
+    rows="3" cols="50">
+    </textarea> <br><br>
+    <input  type="submit" name="Envoyer">
+
+</form>
+
+<%= image_tag @evenement.picture_url %>
+<%= link_to "Deconnexion", evenement_path(@evenement.id), method: :delete %>
+
+<% if current_user.id == @evenement.user_id %>
+<%= link_to 'Edit', edit_evenement_path(@evenement) %> 
+<%end%>
+<%= link_to 'Back', evenements_path %>

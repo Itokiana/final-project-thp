@@ -1,0 +1,100 @@
+<%= render 'layouts/nav'%>
+<!--================Breadcrumb Area =================-->
+<section class="breadcrumb_area blog_banner_two">
+    <div class="overlay bg-parallax" data-stellar-ratio="0.8" data-stellar-vertical-offset="0" data-background=""></div>
+    <div class="container">
+        <div class="page-cover text-center">
+            <h2 class="page-cover-tittle f_48">Mes evenements</h2>
+            <ol class="breadcrumb">
+                <li><a href="<%= root_path %>">Acceuil</a></li>
+                <li class="active">Mes evenements</li>
+            </ol>
+        </div>
+    </div>
+</section>
+<!--================Breadcrumb Area =================-->
+
+<section class="hotel_booking_area">
+    <div class="container">
+        <div class="row hotel_booking_table">
+            <div class="col-md-3">
+                <h2>Rechercher</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="boking_table">
+                    <form id="filter">
+                    <div class="row">
+                        <div class="col-md-4">
+                          <div class="book_tabel_item">
+                              <div class="form-group">
+                                  <div class="input-group">
+                                      <input class="form-control" name="search" placeholder="Recherche" type="text">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                        <div class="col-md-4">
+                          <div class="book_tabel_item">
+                              <div class="input-group">
+                                  <select class="wide" name="category_id" style="display: none;">
+                                      <option value="1">Sport</option>
+                                  </select>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="book_tabel_item">
+                                <button class="book_now_btn button_hover">Rechercher</button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="blog_area">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+          <div class="blog_left_sidebar">
+            <div class="progress-table">
+              <div class="table-head">
+                <div class="serial">#</div>
+                <div class="country">pic</div>
+                <div class="visit">Titre</div>
+                <div class="percentage"></div>
+              </div>
+            </div>
+            <div class="table-row" id="result">
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+$("#filter").submit(function(e){
+  e.preventDefault()
+
+  $.post('/filter', $(this).serialize(), function(data){
+    console.log(data)
+    let res = ''
+    for(let i = 0; i < data.length; i++){
+      res = '<div class="serial">'+(i+1)+'</div>'+
+              '<div class="country"> <img src="'+data[0].picture.url+'"></div>'+
+              '<div class="visit">'+data[0].titre+'</div>'+
+              '<div class="percentage">'+
+                '<div class="progress">'+
+                  '<a href="/events/'+data[0].id+'/show">Voir</a>'+
+                '</div>'+
+              '</div>'
+    }
+    $('#result').html(res)
+  })
+})
+</script>

@@ -1,0 +1,35 @@
+<%= form_with(model: organisateur, local: false, remote: true, html: {id: "org"}) do |form| %>
+  <% if organisateur.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(organisateur.errors.count, "error") %> prohibited this organisateur from being saved:</h2>
+
+      <ul>
+      <% organisateur.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :Nom_organisation %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :about %>
+    <%= form.text_area :about %>
+  </div>
+
+  <div class="field-select">
+    <select class="form-control" name="status_id">
+      <% @statuses.each do |s|%>
+        <option value="<%= s.id %>"><%= s.title %></option>
+      <%end%>
+    </select>
+  </div>
+
+  <div class="actions">
+    <button>Create</button>
+  </div>
+<% end %>

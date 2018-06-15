@@ -1,0 +1,11 @@
+$("#org").remove()
+$("#no-org").css('display','block')
+$.get("/organisateurs.json", function(data){
+  let options_organisateur = ""
+  for(let i = 0; i < data.length; i++){
+    options_organisateur += '<option value="'+data[i].id+'">'+data[i].title+"</option>"
+  } 
+  $("#opt-org").html(options_organisateur)
+  $("#opt-org").css('display','block')
+  $(".field-select .nice-select").remove()
+})

@@ -1,0 +1,79 @@
+
+<%= form_with(model: evenement, local: true, :html => {id: "event",multipart: true}) do |form| %>
+  <% if evenement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(evenement.errors.count, "error") %> prohibited this evenement from being saved:</h2>
+
+      <ul>
+      <% evenement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :Picture %>
+    <%= form.file_field :picture%>
+  </div>
+
+  <div class="field">
+    <%= form.label :titre %>
+    <%= form.text_field :titre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <div class="input-group date" id="datetimepicker11">
+      <%= form.label :date %>
+      <%= form.text_field :date, class: "form-control" %>
+      <span class="input-group-addon">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div class="field">
+    <select name="category_id">
+      <% @categories.each do |cat|%>
+        <option value="<%= cat.id %>"><%= cat.name %></option>
+      <%end%>
+    </select>
+  </div>
+
+  <div class="field">
+    <select name="organisateur_id" id="opt-org">
+      <% @organisateurs.each do |org|%>
+        <option value="<%= org.id %>"><%= org.title %></option>
+      <%end%>
+    </select>
+  </div>
+
+  <!--map div-->
+  <div id="map"  class="map"></div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :lat, id: "lat",readonly: "yes"  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :lng, id: "lng", readonly: "yes" %>
+  </div>
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,49 @@
+<!--================Header Area =================-->
+<header class="header_area">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <a class="navbar-brand logo_h" href="<%= root_path %>"><img style="height: 70px" src="/image/Logo.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                <ul class="nav navbar-nav menu_nav">
+                    <li class="nav-item"><a class="nav-link" href="<%= root_path %>">Accueil</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="">About us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="">Contact</a></li>
+                    <%if user_signed_in? %>
+                        <li class="nav-item">
+                            <%= link_to "mes evenements", evenements_path, data: {turbolinks: false}, class: "nav-link"%>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Nouveau evenement", new_evenement_path, data: {turbolinks: false}, class: "nav-link"%>
+                        </li>
+                    <%end%>
+                </ul>
+                <div class="form-inline my-2 ml-auto">
+                    <%= link_to search_path, class: "genric-btn primary-border circle", style: "margin-right: 20px" do%>
+                        Rechercher
+                        &nbsp;<span class="lnr lnr-magnifier"></span>
+                    <%end%>
+                    <%if user_signed_in? %>
+                    <%= link_to destroy_user_session_path, method: :delete, class: "genric-btn danger-border circle" do %>
+                        Deconnexion
+                        <span class="lnr lnr-arrow-right"></span>
+                    <%end%>
+
+                    <%else%>
+                      <%= link_to new_user_session_path, class: "genric-btn info-border circle", style: "margin-right: 20px" do%>
+                        Connexion
+                        <span class="lnr lnr-arrow-right"></span>
+                      <%end%>
+                    <%end%>
+                </div>
+            </div> 
+        </nav>
+    </div>
+</header>
+<!--================Header Area =================-->
